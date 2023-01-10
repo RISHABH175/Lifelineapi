@@ -113,7 +113,7 @@ app.post("/valpost", (req, res) => {
 
 app.get('/:id', (req, res) => {
     const req1 = req.params.id;
-    userD.findOne({ userID: req1 }, (err, post2) => {
+    userD.findOne({ mobileno:req1 }, (err, post2) => {
         if (err) {
             //console.log("error");
             res.status(404).send({ Error: "Invalid userID received" });
@@ -150,6 +150,35 @@ app.get('/:id', (req, res) => {
     }
 )}
 )
+
+app.get('/mobile/:id', (req, res) => {
+    const req1 = req.params.id;
+    //console.log(req1);
+    Post.findOne({ userID: req1 }, (err, post2) => {
+        if (err) {
+            //console.log("error");
+            res.status(404).send({ Error: "Invalid userID received" });
+        } else {
+           
+            res.send(post2);
+        }
+    }
+)}
+)
+
+app.get('/emr/:id',(req,res)=>{
+    const req1 = req.params.id;
+    //console.log(req1);
+    userD.findOne({ userID: req1 },"-files" ,(err, post2) => {
+        if (err) {
+            //console.log("error");
+            res.status(404).send({ Error: "Invalid userID received" });
+        } else {
+            console.log(post2);
+            res.send(post2);
+        }
+    })
+})
 
 app.post('/editpost',uploads.any(),(req,res)=>{
     console.log(req.body);
