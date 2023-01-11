@@ -101,7 +101,7 @@ app.post("/valpost", (req, res) => {
             // throw err;
         } else {
             if (posts1.password === req.body.password) {
-                res.status(200).send();
+                res.status(200).send(posts1);
             }
             else {
                 res.status(404).send("Email or Password is wrong");
