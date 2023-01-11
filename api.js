@@ -128,17 +128,17 @@ app.get('/:id', (req, res) => {
 
 app.get('/mobile/:id', (req, res) => {
     const req1 = req.params.id;
-    //console.log(req1);
-    Post.findOne({ userID: req1 }, (err, post2) => {
-        if (err) {
-            //console.log("error");
-            res.status(404).send({ Error: "Invalid userID received" });
-        } else {
-           
-            res.send(post2);
+    const query = userD.where({userID:req1});
+    query.findOne((err,res1)=>{
+        if(err){
+            res.status(500).send();
         }
-    }
-)}
+        else{
+            console.log(res1);
+            res.status(200).send(res1);
+        }
+    })
+}
 )
 
 app.get('/emr/:id',(req,res)=>{
