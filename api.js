@@ -113,42 +113,17 @@ app.post("/valpost", (req, res) => {
 
 app.get('/:id', (req, res) => {
     const req1 = req.params.id;
-    userD.findOne({ mobileno:req1 }, (err, post2) => {
-        if (err) {
-            //console.log("error");
-            res.status(404).send({ Error: "Invalid userID received" });
-        } else {
-            //console.log(post2.files);
-        //     let filesL = post2.files.length;
-        //     // console.log(files);
-        //     for (let i = 0; i < filesL; i++) {
-        //         const tempFilePath = `file${i}`;
-        //         fs1.writeFileSync(tempFilePath,post2.files[i].file,{flag:'w'});
-      
-        //         // Use the child_process module to run the unoconv command
-        //         const command = "C:\\Program Files\\LibreOffice\\program\\soffice.exe";
-        //         console.log(command);
-        //         child_process.execFile(command,['--headless',
-        //         '--convert-to', 'pdf',
-        //         '--outdir', 'output',
-        //         tempFilePath], (error, stdout, stderr) => {
-        //             if (error) {
-        //                 // Handle the error
-        //                 console.error(error);
-        //                 //res.status(500).send();
-        //                 return;
-        //             }
-        //             console.log("here");
-        //             // Send the converted file back to the client
-        //             //res.sendFile(`/output/${tempFilePath}.pdf`);
-        //         }
-        //     //res.status(200).send(post2);
-        // )
-        //     }
-            res.send(post2);
+    const query = userD.where({userID:req1});
+    query.findOne((err,res1)=>{
+        if(err){
+            res.status(500).send();
         }
-    }
-)}
+        else{
+            console.log(res1);
+            res.status(200).send(res1);
+        }
+    })
+}
 )
 
 app.get('/mobile/:id', (req, res) => {
