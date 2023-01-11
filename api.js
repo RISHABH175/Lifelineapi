@@ -128,7 +128,7 @@ app.get('/:id', (req, res) => {
 
 app.get('/mobile/:id', (req, res) => {
     const req1 = req.params.id;
-    const query = userD.where({userID:req1});
+    const query = Post.where({userID:req1});
     query.findOne((err,res1)=>{
         if(err){
             res.status(500).send();
